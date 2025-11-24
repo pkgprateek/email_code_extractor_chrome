@@ -78,4 +78,19 @@ describe('findSecret', () => {
         const text = "Verification Code 123456 - Your login details";
         expect(findSecret(text)).toBe("123456");
     });
+
+    it('ignores ordinal numbers like 21st', () => {
+        const text = "Meeting on 21st December";
+        expect(findSecret(text)).toBe(null);
+    });
+
+    it('ignores duration patterns like 1-month', () => {
+        const text = "Subscribe for 1-month trial";
+        expect(findSecret(text)).toBe(null);
+    });
+
+    it('ignores standalone word Time', () => {
+        const text = "Time to renew your subscription";
+        expect(findSecret(text)).toBe(null);
+    });
 });

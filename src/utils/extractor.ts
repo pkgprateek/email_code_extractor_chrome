@@ -26,6 +26,9 @@ const EXCLUDE_PATTERNS = [
   /\b\d+(?:\.\d+)?\s*[kKmMbB]\b/, // Currency/Number suffixes (e.g., 100M, 10k)
   /gmt[-+]\d+/i, // Timezones (e.g., GMT-5)
   /\b\d+-\d+\b/, // Number ranges (e.g., 25-26)
+  /\b\d+-(?:month|year|day|week|hour|minute)s?\b/i, // Duration patterns (e.g., 1-month, 3-days)
+  /\b\d+(?:st|nd|rd|th)\b/i, // Ordinal numbers (e.g., 21st, 2nd, 3rd)
+  /^time$/i, // Standalone "Time" word
   /\bhead\b|\bbody\b|\bhtml\b|\bscript\b|\bstyle\b/i, // Common HTML tags
   /^\d{4}-\d{2}-\d{2}$/, // ISO Date
   /^\d{1,2}\/\d{1,2}\/\d{2,4}$/, // Date with slashes
@@ -107,16 +110,21 @@ export function findSecret(text: string): string | null {
       score += 30;
     }
 
+    // Boost purely numeric codes (common for OTPs)
+    if (/^\d+$/.test(code)) {
+      score += 10;
+    }
+
     return { code, score };
   });
 
-  // Sort by score descending
+  // Sort codes by score descending
   scoredCodes.sort((a, b) => b.score - a.score);
 
   const bestMatch = scoredCodes[0];
 
-  // Threshold
-  if (bestMatch && bestMatch.score > 15) {
+  // Higher threshold to reduce false positives
+  if (bestMatch && bestMatch.score > 20) {
     return bestMatch.code;
   }
 
