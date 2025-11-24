@@ -1,8 +1,11 @@
+
+<img src="public/img/preview.png" alt="Email Code Extractor Preview" style="display: block; margin: 0 auto; max-width:200px">
+
+
 # Email Code Extractor
 
 **Email Code Extractor** is a secure, privacy-focused Chrome extension that automatically detects and extracts OTPs, 2FA codes, and promo codes from your email list. Copy codes instantly without ever opening the email.
 
-![Email Code Extractor Preview](public/img/preview.png)
 
 ## 🚀 Features
 
