@@ -1,0 +1,36 @@
+{
+  "manifest_version": 3,
+  "name": "Email Code Extractor",
+  "version": "1.0",
+  "description": "Automatically detects and extracts secret codes (otp, promo, order etc.) from email messages for easy copying and use.",
+  "permissions": ["activeTab"],
+  "icons": {
+    "16": "img/icon16.png",
+    "32": "img/icon32.png",
+    "48": "img/icon48.png",
+    "96": "img/icon96.png",
+    "128": "img/icon128.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "img/icon16.png",
+      "32": "img/icon32.png",
+      "48": "img/icon48.png",
+      "96": "img/icon96.png",
+      "128": "img/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["img/copy_icon_light.svg", "img/copy_icon_dark.svg", "img/icon16.png", "img/icon32.png", "img/icon48.png", "img/icon96.png", "img/icon128.png"],
+      "matches": ["https://mail.google.com/*"]
+    }
+  ]
+}
