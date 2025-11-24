@@ -1,5 +1,5 @@
 
-<img src="public/img/preview.png" alt="Email Code Extractor Preview" style="display: block; margin: 0 auto; max-width:200px">
+<img src="./public/img/preview.png" alt="Email Code Extractor Preview" style="display: block; margin: 0 auto;" width="200">
 
 
 # Email Code Extractor
