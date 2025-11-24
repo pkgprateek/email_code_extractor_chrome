@@ -1,73 +1,76 @@
-# React + TypeScript + Vite
+# Email Code Extractor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Email Code Extractor** is a secure, privacy-focused Chrome extension that automatically detects and extracts OTPs, 2FA codes, and promo codes from your email list. Copy codes instantly without ever opening the email.
 
-Currently, two official plugins are available:
+![Email Code Extractor Preview](public/img/preview.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## React Compiler
+- **Instant Extraction**: Automatically finds and displays verification codes (OTP, 2FA) and discount codes next to the email subject.
+- **One-Click Copy**: Copy codes to your clipboard with a single click.
+- **Privacy First**: All processing happens locally on your device. No data is ever sent to external servers.
+- **Smart Detection**: Uses advanced heuristics to distinguish between real codes and false positives (like phone numbers or dates).
+- **Dark Mode Support**: Seamlessly integrates with Gmail's dark and light themes.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+Built with modern industry-standard tools for performance, security, and maintainability:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **[React](https://react.dev/)**: For a declarative and robust UI.
+- **[TypeScript](https://www.typescriptlang.org/)**: For type safety and code reliability.
+- **[Vite](https://vitejs.dev/)**: For a blazing fast build pipeline.
+- **[Vitest](https://vitest.dev/)**: For unit testing extraction logic.
+- **[PNPM](https://pnpm.io/)**: Fast, disk-space efficient package manager.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 📦 Installation
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### From Chrome Web Store
+*(Coming Soon)*
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Manual Installation (Developer Mode)
+
+1.  **Clone the repository**
+    ```bash
+    git clone https://github.com/pkgprateek/email_code_extractor_chrome.git
+    cd email_code_extractor_chrome
+    ```
+
+2.  **Install dependencies**
+    ```bash
+    pnpm install
+    ```
+
+3.  **Build the project**
+    ```bash
+    pnpm build
+    ```
+
+4.  **Load into Chrome**
+    - Open Chrome and navigate to `chrome://extensions/`
+    - Enable **"Developer mode"** in the top right corner.
+    - Click **"Load unpacked"**.
+    - Select the `dist` folder generated in the project directory.
+
+## 💻 Development
+
+To start developing and watch for changes:
+
+```bash
+pnpm build --watch
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Running Tests
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+To verify the extraction logic:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+pnpm test
 ```
+
+## 🔒 Privacy Policy
+
+This extension operates entirely within your browser. It scans the DOM of the Gmail list view to identify potential codes. **No email content is stored, transmitted, or shared.**
+
+## 📄 License
+
+[MIT](LICENSE)
