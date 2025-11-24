@@ -43,4 +43,39 @@ describe('findSecret', () => {
         const text = "width: 100px; height: 200px;";
         expect(findSecret(text)).toBe(null);
     });
+
+    it('ignores times like 8am', () => {
+        const text = "Meeting at 8am tomorrow";
+        expect(findSecret(text)).toBe(null);
+    });
+
+    it('ignores currency/large numbers like 100M', () => {
+        const text = "Startup raised 100M funding";
+        expect(findSecret(text)).toBe(null);
+    });
+
+    it('ignores currency/large numbers like 10k', () => {
+        const text = "Over 10k users";
+        expect(findSecret(text)).toBe(null);
+    });
+
+    it('ignores timezones like GMT-5', () => {
+        const text = "Meeting at 10am GMT-5";
+        expect(findSecret(text)).toBe(null);
+    });
+
+    it('ignores number ranges like 25-26', () => {
+        const text = "Pages 25-26";
+        expect(findSecret(text)).toBe(null);
+    });
+
+    it('ignores email addresses', () => {
+        const text = "Contact abcdme@yahoo.com for info";
+        expect(findSecret(text)).toBe(null);
+    });
+
+    it('extracts code from subject line', () => {
+        const text = "Verification Code 123456 - Your login details";
+        expect(findSecret(text)).toBe("123456");
+    });
 });

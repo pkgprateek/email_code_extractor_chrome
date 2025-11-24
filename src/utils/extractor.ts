@@ -22,6 +22,10 @@ const EXCLUDE_PATTERNS = [
   /\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}/, // IP addresses
   /\b(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+\d{1,2}\b/i, // Date patterns
   /\b\d{1,2}:\d{2}\b/, // Time patterns
+  /\b\d{1,2}(?::\d{2})?\s*(?:am|pm)\b/i, // Time with AM/PM (e.g., 8am, 8:30pm)
+  /\b\d+(?:\.\d+)?\s*[kKmMbB]\b/, // Currency/Number suffixes (e.g., 100M, 10k)
+  /gmt[-+]\d+/i, // Timezones (e.g., GMT-5)
+  /\b\d+-\d+\b/, // Number ranges (e.g., 25-26)
   /\bhead\b|\bbody\b|\bhtml\b|\bscript\b|\bstyle\b/i, // Common HTML tags
   /^\d{4}-\d{2}-\d{2}$/, // ISO Date
   /^\d{1,2}\/\d{1,2}\/\d{2,4}$/, // Date with slashes
@@ -29,13 +33,13 @@ const EXCLUDE_PATTERNS = [
 
 export function findSecret(text: string): string | null {
   if (!text) return null;
-  
+
   const normalizedText = text.toLowerCase();
-  
+
   // Regex to find potential codes: 4-25 chars, must contain at least one digit
   // Improved to avoid matching common words by ensuring mixed case or digits
   const potentialCodes = text.match(/\b(?=.*\d)[-*A-Za-z0-9]{4,25}\b/g) || [];
-  
+
   if (potentialCodes.length === 0) return null;
 
   const scoredCodes: ExtractedCode[] = potentialCodes.map((code) => {
@@ -87,6 +91,11 @@ export function findSecret(text: string): string | null {
       score -= 20;
     }
 
+    // Email address detection: check if followed immediately by @
+    if (text[codeIndex + code.length] === '@') {
+      score -= 50;
+    }
+
     // Year detection (19xx or 20xx)
     if (/^(19|20)\d{2}$/.test(code)) {
       score -= 30;
@@ -103,7 +112,7 @@ export function findSecret(text: string): string | null {
 
   // Sort by score descending
   scoredCodes.sort((a, b) => b.score - a.score);
-  
+
   const bestMatch = scoredCodes[0];
 
   // Threshold

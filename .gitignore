@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Guides
+CHROME_WEB_STORE.md
+PUBLICATION_CHECKLIST.md
+
+# Zip
+*.zip

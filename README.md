@@ -1,62 +1,60 @@
 
-<img src="./public/img/preview.png" alt="Email Code Extractor Preview" style="display: block; margin: 0 auto;" width="200">
+<img src="./public/img/preview.png" alt="CodeSnap for Gmail" style="display: block; margin: 0 auto;" width="200">
 
+# CodeSnap for Gmail
 
-# Email Code Extractor
+Instantly copy OTPs and verification codes from Gmail without opening emails. A secure, privacy-focused Chrome extension that saves you time.
 
-**Email Code Extractor** is a secure, privacy-focused Chrome extension that automatically detects and extracts OTPs, 2FA codes, and promo codes from your email list. Copy codes instantly without ever opening the email.
-
-
-## 🚀 Features
+## Features
 
 - **Instant Extraction**: Automatically finds and displays verification codes (OTP, 2FA) and discount codes next to the email subject.
 - **One-Click Copy**: Copy codes to your clipboard with a single click.
 - **Privacy First**: All processing happens locally on your device. No data is ever sent to external servers.
-- **Smart Detection**: Uses advanced heuristics to distinguish between real codes and false positives (like phone numbers or dates).
-- **Dark Mode Support**: Seamlessly integrates with Gmail's dark and light themes.
+- **Smart Detection**: Uses advanced heuristics to distinguish between real codes and false positives (like phone numbers, dates, or email addresses).
+- **Seamless Integration**: Works with Gmail's dark and light themes.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 Built with modern industry-standard tools for performance, security, and maintainability:
 
-- **[React](https://react.dev/)**: For a declarative and robust UI.
-- **[TypeScript](https://www.typescriptlang.org/)**: For type safety and code reliability.
-- **[Vite](https://vitejs.dev/)**: For a blazing fast build pipeline.
-- **[Vitest](https://vitest.dev/)**: For unit testing extraction logic.
-- **[PNPM](https://pnpm.io/)**: Fast, disk-space efficient package manager.
+- **React**: Declarative and robust UI components
+- **TypeScript**: Type safety and code reliability
+- **Vite**: Fast build pipeline
+- **Vitest**: Unit testing for extraction logic
+- **PNPM**: Efficient package management
 
-## 📦 Installation
+## Installation
 
 ### From Chrome Web Store
-*(Coming Soon)*
+Coming Soon
 
 ### Manual Installation (Developer Mode)
 
-1.  **Clone the repository**
+1.  Clone the repository
     ```bash
-    git clone https://github.com/pkgprateek/email_code_extractor_chrome.git
-    cd email_code_extractor_chrome
+    git clone https://github.com/pkgprateek/codesnap-for-gmail.git
+    cd codesnap-for-gmail
     ```
 
-2.  **Install dependencies**
+2.  Install dependencies
     ```bash
     pnpm install
     ```
 
-3.  **Build the project**
+3.  Build the project
     ```bash
     pnpm build
     ```
 
-4.  **Load into Chrome**
+4.  Load into Chrome
     - Open Chrome and navigate to `chrome://extensions/`
-    - Enable **"Developer mode"** in the top right corner.
-    - Click **"Load unpacked"**.
-    - Select the `dist` folder generated in the project directory.
+    - Enable "Developer mode" in the top right corner
+    - Click "Load unpacked"
+    - Select the `dist` folder from the project directory
 
-## 💻 Development
+## Development
 
-To start developing and watch for changes:
+To start developing with live reload:
 
 ```bash
 pnpm build --watch
@@ -70,10 +68,17 @@ To verify the extraction logic:
 pnpm test
 ```
 
-## 🔒 Privacy Policy
+## Privacy Policy
 
-This extension operates entirely within your browser. It scans the DOM of the Gmail list view to identify potential codes. **No email content is stored, transmitted, or shared.**
+This extension operates entirely within your browser. It scans the DOM of the Gmail list view to identify potential codes. No email content is stored, transmitted, or shared with any external servers.
 
-## 📄 License
+## Security
+
+- **Manifest V3**: Uses the latest Chrome extension manifest for enhanced security
+- **Minimal Permissions**: Only requests `activeTab` permission
+- **No Network Requests**: All code execution happens locally
+- **Content Security Policy**: Strict CSP prevents unauthorized script execution
+
+## License
 
 [MIT](LICENSE)

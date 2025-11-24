@@ -1,9 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "Email Code Extractor",
+  "name": "CodeSnap for Gmail",
   "version": "2.0.0",
-  "description": "Automatically detects and extracts secret codes (otp, promo, order etc.) from email messages for easy copying and use.",
-  "permissions": ["activeTab"],
+  "description": "Instantly copy OTPs and verification codes from Gmail without opening emails. Privacy-focused and secure.",
+  "permissions": [
+    "activeTab"
+  ],
   "icons": {
     "16": "img/icon16.png",
     "32": "img/icon32.png",
@@ -13,16 +15,24 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://mail.google.com/*"],
-      "js": ["content.js"],
-      "css": ["assets/style.css"],
+      "matches": [
+        "https://mail.google.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
       "run_at": "document_end"
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["img/*.png", "img/*.svg"],
-      "matches": ["https://mail.google.com/*"]
+      "resources": [
+        "img/*.png",
+        "img/*.svg"
+      ],
+      "matches": [
+        "https://mail.google.com/*"
+      ]
     }
   ]
 }
