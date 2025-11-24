@@ -1,66 +1,73 @@
-# Email Code Extractor
+# React + TypeScript + Vite
 
-A Chrome extension that automatically detects and extracts secret codes (like OTPs, verification codes, etc.) from your email messages, making it easier to copy and use them.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Features
+Currently, two official plugins are available:
 
-- Automatically scans email content for potential secret codes
-- Displays detected codes prominently next to email subjects
-- One-click copy functionality for easy code usage
-- Works with various email formats and code types
-- Adapts to light and dark email themes
-- Prioritizes user privacy and security
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Installation
+## React Compiler
 
-1. Clone this repository or download the ZIP file.
-2. Open Chrome and go to `chrome://extensions`.
-3. Enable "Developer mode" in the top right corner.
-4. Click "Load unpacked" and select the extension directory.
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Usage
+## Expanding the ESLint configuration
 
-1. Once installed, navigate to your email client in Chrome and once hit hard refresh [Ctrl/Cmd + Shift + R] or restart chrome.
-2. The extension will automatically scan your emails for secret codes.
-3. If a code is detected, it will appear next to the email subject.
-4. Click on the code or the copy icon to copy it to your clipboard.
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-## Privacy and Security
- 
-This extension prioritizes your privacy and security:
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-- It does not store or transmit any of your email data.
-- All code detection and processing happens locally in your browser.
-- No third-party libraries or services are used.
-- Extension does not open or read the full content of your emails; it only scans - the visible email snippets on the page.
-- No data is collected or stored beyond the current browser session.
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-## How It Works
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-The extension uses a sophisticated algorithm to detect potential secret codes:
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-1. It scans the visible text of email snippets on the page.
-2. It looks for patterns that match common secret code formats (e.g., sequences of numbers and letters).
-3. It uses context clues, like nearby keywords related to verification or authentication, to score the potential codes and improve accuracy.
-4. It filters out common non-code patterns like CSS measurements, color codes, and dates.
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-## Contributing
-
-Contributions to improve the extension are welcome! Please follow these steps:
-
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Make your changes and test thoroughly.
-4. Submit a pull request with a clear description of your changes.
-
-## License
-
-This project is licensed under the terms of the license file in the root directory of this project. See the LICENSE file for details.
-
-## Support
-
-If you encounter any issues or have questions, please open an issue on this GitHub repository.
-
-## Disclaimer
-
-This extension is not affiliated with or endorsed by any email service provider. Use it at your own discretion. Always verify the authenticity of any codes or links in your emails.
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
